@@ -1,0 +1,12 @@
+<h1>{{ title}}</h1>
+
+{% if age > 18 %}
+
+<p>Vous êtes majeur</p>
+
+{% else %}
+
+<p> vous etes mineurs</p>
+{ % endif%}
+
+

@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Hello BlogController!{% endblock %}
+
+{% block body %}
+
+<h1 class="display-4 text-center #y-4">Lisez des articles"</h1>
+<div class="row d-flex justify-content-around">
+<div class="card" style="width: 18rem;">
+  <img src=https://picsum.photos/200/300 " class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
+  {# path('blog_show) : définit la route de BlogController #}
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+<div class="card" style="width: 18rem;">
+  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>
+  
+
+{% endblock %}
