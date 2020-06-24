@@ -1,44 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Hello BlogController!{% endblock %}
+{% block title %}Blog Symfony | Articles{% endblock %}
 
 {% block body %}
 
-<h1 class="display-4 text-center #y-4">Lisez des articles"</h1>
-<div class="row d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
-  <img src=https://picsum.photos/200/300 " class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
-  {# path('blog_show) : définit la route de BlogController #}
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-<div class="card" style="width: 18rem;">
-  <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="{{ path('blog_show') }}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
-  
+    <h1 class="display-4 text-center my-4">Liste des articles</h1>
+
+    <div class="row d-flex justify-content-around">
+    {# for esr une boucle/ commande TWIG ici nous avons réceptionné 10 articles en BDD et don boucle for pr automatiser
+     la variable article provient du controller et de la méthode  index() ($this=> render ['articles'] elle contient les 10 articles sléctionnés en BDD
+     {{ data.title }}
+     {{ data.content|raw }}
+     {{ data.createAt|date("d/m/Y")}} 
+#}
+
+        {% for data in articles %}
+    
+            <div class="card mb-2 text-center" style="width: 18rem;">
+                <img src="{{ data.image }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ data.title }}</h5>
+                    <p class="card-text">{{ data.content|raw }}</p>
+                    <p>Posté le {{ data.createAt|date("d/m/Y")}} à {{ data.createAt|date("H:i:s") }}</p>
+
+                    {# la date est renvoyée par la bdd sous forme d'objet dateTime il n'st pas possible d'afficher methode 
+                    {{ data.createAt|date("d/m/Y")}}   et  {{ data.createAt|date("H:i:s") }}< #}
+
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="{{ path('blog_show', {'id': data.id} ) }}" class="btn btn-dark">    Go somewhere</a>
+                    {# path('blog_show') : nom de la route pour le détail d'un article définit dans la méthode show() du controller 'BlogController' #}
+                </div>
+            </div>
+
+        {% endfor %}
+    
+    </div>
 
 {% endblock %}
+
+
+
