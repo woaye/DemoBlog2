@@ -28,7 +28,8 @@
                         <a class="nav-link" href="{{ path('home') }}">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="{{ path('blog') }}">Articles</a>
+                        <a class="nav-link" href="{{ path('blog_create') }}">Creer article</a>
+                        <li class="creer un article " href {{ path ('blog_create')}}  </li>
                         {# path() : fonction TWIG permettant de générer une URL en fonction du nom de la route envoyer en argument. ex path('blog') --> URL '/blog' #}
                         {# Le nom de la route 'blog' est déclarée dans le controller 'BlogController' et est rattaché à la méthode 'index()' (@Route('/blog', name='blog')) #}
                     </li>
