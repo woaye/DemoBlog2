@@ -1,0 +1,79 @@
+  {% extends "base.html.twig" %}
+
+  {# editMode : variable TWIG provient du controller de la méthode form(), elle permet de savoir si un article possède
+  1 ID cela permet de gérer l'affichage en fonction mode ajout/ modif #}
+
+  {# si IF renvoit TRUE, ca veut dire que larticle a 1 ID alors c une insertion #}
+
+
+{% block body %}
+
+    <h1 class="display-4 text-center my-4">
+    {% if  editMode %}
+    Modification de l'article
+
+    {% else %}
+    Créer un article
+
+    {% endif %}
+
+</h1>
+
+{# form_start debur le form en fonction twig elle permet de généférer les balises <form> ouvrant, symfony integre automatqiuement l(attribut method post
+#)
+
+{# le bouton submit est codé en dur puisque le form servira a la fois  à isnrérer et modifier en bdd les info #}
+{# si on crée la fonction avec add permet d'inésrer lesattributs #}
+
+
+
+    {{ form_start(formArticle, {'attr': {'class': 'col-md-7 mx-auto'}}) }}
+    
+
+  {{ form_row(formArticle.title, {'attr': {"placeholder": "Saisir le titre de l'article"}}) }}
+    {{ form_row(formArticle.title, {'attr': {"placeholder": "Contenu de l'article..", "rows":15}}) }}
+     {{ form_row(formArticle.content, {'attr': {"placeholder":"saisir l url de l'image..."}}) }}
+      
+      
+      
+      {{ form_row(formArticle.image, {'attr': {"placeholder":"saisir l url de l'image..."}}) }}
+
+      
+       <button type="submit" class="btn-btn-info">Enregistrer
+             
+             {% if editMode %}
+             enregister les modifications
+             {% else %}
+               Enregistrer
+            {% endif %}
+            </button>
+             
+             {{ form_end(formArticle) }} 
+
+
+
+
+ 
+     {# {{ form(formArticle) }} #}
+
+
+
+    {# <form method="post" action="" class="col-md-6 mx-auto">
+        <div class="form-group">
+            <label for="title">Titre</label>
+            <input type="text" class="form-control" id="title" name="title">
+        </div>
+        <div class="form-group">
+            <label for="content">Contenu de l'article</label>
+            <textarea class="form-control" id="content" name="content" rows="8"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" class="form-control" id="image" name="image">
+        </div>
+        <button type="submit" class="btn btn-dark">Enregistrer</button>
+    </form> #}
+     #}
+
+
+{% endblock %}

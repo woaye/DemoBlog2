@@ -1,23 +1,26 @@
-{% extends "base.html.twig" %}
-{# On hérite du template 'base.html.twig' #}
+        {% extends "base.html.twig" %}
+        {# On hérite du template 'base.html.twig' #}
 
-{# On appel le block body du template 'base.html.twig' #}
-{% block body %}
+        {# On appel le block body du template 'base.html.twig' #}
+        {% block body %}
 
-    <h1 class="display-4 text-center my-4">Détails de l'article</h1>
-
-    <div class="col-md-12 card mb-2 text-center p-0">
-        <img src="https://picsum.photos150/100" class="card-img-top" alt="...">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit erat, suscipit et gravida sit amet, maximus maximus mi. Vestibulum interdum cursus dolor bibendum iaculis. Morbi ligula ipsum, ultricies et odio sed, tristique auctor tortor. Phasellus consequat porta augue, dapibus consequat justo commodo id. Nunc porttitor interdum lacus vel iaculis. Fusce id sem convallis, consequat augue eu, euismod turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vestibulum ligula eget nisi placerat viverra.</p>
-
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit erat, suscipit et gravida sit amet, maximus maximus mi. Vestibulum interdum cursus dolor bibendum iaculis. Morbi ligula ipsum, ultricies et odio sed, tristique auctor tortor. Phasellus consequat porta augue, dapibus consequat justo commodo id. Nunc porttitor interdum lacus vel iaculis. Fusce id sem convallis, consequat augue eu, euismod turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vestibulum ligula eget nisi placerat viverra.</p>
-
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras velit erat, suscipit et gravida sit amet, maximus maximus mi. Vestibulum interdum cursus dolor bibendum iaculis. Morbi ligula ipsum, ultricies et odio sed, tristique auctor tortor. Phasellus consequat porta augue, dapibus consequat justo commodo id. Nunc porttitor interdum lacus vel iaculis. Fusce id sem convallis, consequat augue eu, euismod turpis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi vestibulum ligula eget nisi placerat viverra.</p>
-        </div>
-    </div>
-    
-{% endblock %}
+            <h1 class="display-4 my-4 text-center">Détails de l'article</h1>
+            {# article est une varibale twig qui provient du controller et de la methode show #}
+        {#la varibale article contient le détail de l'article sélectinné en bdd //pas besoin de boucle 1article #}
+        
+            <div class="col-md-12 card mb-2 p-0">
+                <img src={{ article.image|replace({"200/200": "1000/300"}) }}
+                {#replace filtre twig qui permet de remplacer l'image par exemple ou une partie de chaine de caracter par une autre #}
+                
+                <div class="card-body">
+                    <h5 class="card-title text-center"> {{ article.title }} </h5>
+                    <p class="text-center">{{ article.content|raw }}</p>
+                    <hr>
+                    <span class="col-md 2"><a href ="{{ path('blog_edit',  {'id': article.id}  ) }}" class="text-left btn btn-warning"> MODIFIER </a> </span>
+                    <span class="col-md 6 font-italic text-right">Posté le {{ article.createAt|date("d/m/Y") }} à {{ article.createAt|date("H:i:s") }}</span>
+                </div>
+            </div>
+            
+        {% endblock %}
 
 

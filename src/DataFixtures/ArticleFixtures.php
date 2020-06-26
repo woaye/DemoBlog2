@@ -3,13 +3,14 @@
 namespace App\DataFixtures;
 
 use App\Entity\Article;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use Doctrine\Common\DataFictures\FixtureInterface;
 
 
 
 
-class ArticleFixtures implements Fixture
+
+class ArticleFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
@@ -19,8 +20,9 @@ class ArticleFixtures implements Fixture
 
              $article->setTitle("Titre de l'artcile n°$i" )
                ->setContent("<p>Contenu de l'article n°$i</p>")
-               ->setImage("https://picsum.photos/200")
-               ->setCreatedAt(new\DateTime());
+               ->setImage("https://picsum.photos/seed/picsum/200/200")
+              
+               ->setCreateAt(new \DateTime());
 
 
                $manager->persist($article);// prepare la requete//
