@@ -17,8 +17,42 @@
                     <p class="text-center">{{ article.content|raw }}</p>
                     <hr>
                     <span class="col-md 2"><a href ="{{ path('blog_edit',  {'id': article.id}  ) }}" class="text-left btn btn-warning"> MODIFIER </a> </span>
-                    <span class="col-md 6 font-italic text-right">Posté le {{ article.createAt|date("d/m/Y") }} à {{ article.createAt|date("H:i:s") }}</span>
+                    <span class="col-md 6 font-italic text-right">Posté le {{ article.createAt|date("d/m/Y") }} à {{ article.createAt|date("H:i:s") }} dans la catégorie {{ article.categorie.title }} </span>
                 </div>
+
+
+
+                <h2 class="text-center mt-5">Derniers avis </h2>
+
+                {# grace a la methode bi dimensionnelle, nous selectionnons ne table sql , nous avons acces à toutes les données #}
+                {# il faut pour cela crer des tables avec dse clés etrangeres #}
+                {# par exemple  si nous slectionnons l'id ds a bdds avons acces aux articles des autres tables qui sont liés a l' article ms aussi les données des autres tables # }
+                {# c a dire que nous avons acces a la categorie de l article ms aussi aux commentaires #}
+
+                {#on pioche ds la variable TWIFG 'article' afin d acceder aux commentaires cde l'article mais auussi au données article.comments #}
+                {#comments est une variable de réception qui réceptionne une logne de commentaire en bdd par tour de boucle for #}
+
+                {% for comment in article .comments %} 
+
+    
+                 <div class="row border rounded nb-2 bg-dark-text-white" >
+                 <div class="row border rounded nb-2">
+                 <div class ="col-md-4">
+                 <span>{{ comment. author }}</span>
+                 <small class="font-italic"> ( {{ comment.createdAT| date('d/m/y à H:i:s') }})</small>
+                 </div>
+
+
+
+                 </div>
+                 <div class="col-md-8">
+
+                 </div>
+                </div>
+
+
+                  {% endfor %}
+
             </div>
             
         {% endblock %}

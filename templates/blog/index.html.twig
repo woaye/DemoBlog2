@@ -20,7 +20,11 @@
                 <img src="{{ data.image }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ data.title }}</h5>
-                    <p class="card-text">{{ data.content|raw }}</p>
+                    <p class="card-text">{{ data.content|raw }}</p>  
+                    <p class="card-text">{{ data.content|slice  (0, 100| raw)}}...</p>
+                    {# slice() : fonction twig qui retourne une partie de la chaine de caracteres#}
+                    <p> posté le  {{data.category|date("d/m/y") }} à {{ data.create|("H:i:s") }}</p>
+                      
                     <p>Posté le {{ data.createAt|date("d/m/Y")}} à {{ data.createAt|date("H:i:s") }}</p>
 
                     {# la date est renvoyée par la bdd sous forme d'objet dateTime il n'st pas possible d'afficher methode 
