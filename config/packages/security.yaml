@@ -1,63 +1,54 @@
 security:
-    
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-   
-    # declaraction de l encodeur on precise à symfonu que nous allons encoder un parametre
+
+    # declarations de l'encodeur,  on précise à Symfony que nous allons encoder un paramètre dans la classe / Entité User (password)
+    # on précise le type d'encodage (bcrypt)
     encoders:
         App\Entity\User:
             algorithm: bcrypt
 
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         users_in_memory: { memory: null }
 
-
-     #on indique à symfony ou sont stockes les data user en bdd et quelles propriétés controler(email)
+        # on indique à Symfony où sont stocké les données de l'utilisateur, en BDD (in_database), de quelle entité (App\Entity\User)  et quelle propriété il va devoir controller (email)
         in_database:
-           entity:
-               class: App\Entity\User
-               property: email
-    #firewalls  indique la partie du site protégée et par quel moyen
+            entity:
+                class: App\Entity\User
+                property: email
+    # firewalls : quelle partie du site nous allons protéger et par quel moyen ?        
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
-            #main represente le contenu du site 
+        # main : tout le contenu du site
         main:
             anonymous: lazy
+         
 
-            # le firewall main sera protégé avec les données stockees en bdd sur la table user 
-            provider: in_database
+            # le firewall 'main', le contenu du site sera protégé avec les données stockées en BDD dans la table User (provider definit ci-dessus) 
+            provider: in_database   
 
-            # on indique que le site est prétogé par un loging (form de connexion) 
-
-
+            # on indique à Symfony que le site est protégé par un système de formulaire de connexion (form_login)
             form_login: 
-            #loging_path dis a symfony ou est le form de connexio,
+                # login_path permet d'indiquer à Symfony sur quelle route se trouve le formulaire de connexion
                 login_path: security_login
-            # check_path dis quelle route ou les données doivent etre controlles apres saisie
-
+                # check_path permet d'indiquer à Symfony sur quelle route il doit controler les données saisie dans le formulaire de connexion
                 check_path: security_login
 
-            # logout se deconnecte
-                logout:
-                  path: security_logout
-                  target: blog
-                  # qd deconnecté rediriger vers article 
+            # on indique la route permettant de se deconnecter
+            logout:
+                path: security_logout
+                target: blog
+                # un fois deconnecter, cela redirige automatiquement vers la page des articles
 
+            # activate different ways to authenticate
+            # https://symfony.com/doc/current/security.html#firewalls-authentication
 
+            # https://symfony.com/doc/current/security/impersonating_user.html
+            # switch_user: true
 
-                    # activate different ways to authenticate
-                    # https://symfony.com/doc/current/security.html#firewalls-authentication
-
-                    # https://symfony.com/doc/current/security/impersonating_user.html
-                    # switch_user: true
-
-            # Easy way to control access for large sections of your site
-            # Note: Only the *first* access control that matches will be used
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
     access_control:
-                # - { path: ^/admin, roles: ROLE_ADMIN }
-                # - { path: ^/profile, roles: ROLE_USER }
-
-
-        
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }
