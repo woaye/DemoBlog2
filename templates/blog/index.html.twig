@@ -7,32 +7,35 @@
     <h1 class="display-4 text-center my-4">Liste des articles</h1>
 
     <div class="row d-flex justify-content-around">
-    {# for esr une boucle/ commande TWIG ici nous avons réceptionné 10 articles en BDD et don boucle for pr automatiser
-     la variable article provient du controller et de la méthode  index() ($this=> render ['articles'] elle contient les 10 articles sléctionnés en BDD
-     {{ data.title }}
-     {{ data.content|raw }}
-     {{ data.createAt|date("d/m/Y")}} 
-#}
+
+        {# FOR est une boucle / commande de TWIG, ici nous avons receptionné 10 articles de la BDD donc nous devons passer en revue ces 10 articles via la boucle FOR #}
+        {# La variable 'articles' provient du controller 'BlogController' et de la méthode 'index()' ($this->render(['articles'])), elle contient les 10 articles selectionnés en BDD #}
+        {# data est une variable de reception qui receptionne un article par tour de boucle #}
+        {# ex: 1er tour : article n°1 #}
+        {# ex: 2ème tour : article n°2 #}
+        {# ex: 3ème tour : article n° 3 etc... #}
 
         {% for data in articles %}
     
             <div class="card mb-2 text-center" style="width: 18rem;">
                 <img src="{{ data.image }}" class="card-img-top" alt="...">
+                {# nous piochons dans notre variable data avec le point '.' afin d'afficher l'image, le titre, le contenu et la date de l'article #}
                 <div class="card-body">
                     <h5 class="card-title">{{ data.title }}</h5>
-                    <p class="card-text">{{ data.content|raw }}</p>  
-                    <p class="card-text">{{ data.content|slice  (0, 100| raw)}}...</p>
-                    {# slice() : fonction twig qui retourne une partie de la chaine de caracteres#}
-                    <p> posté le  {{data.category|date("d/m/y") }} à {{ data.create|("H:i:s") }}</p>
-                      
-                    <p>Posté le {{ data.createAt|date("d/m/Y")}} à {{ data.createAt|date("H:i:s") }}</p>
+                    <p class="card-text">{{ data.content|raw }}</p>
+                    {# raw : filtre TWIG qui permet d'echapper les balises HTML stockées en BDD <p></p> et d'afficher le texte brut #}
+                    <hr>
+                    <p>Posté le {{ data.createAt|date("d/m/Y") }} à {{ data.createAt|date("H:i:s") }}</p>
 
-                    {# la date est renvoyée par la bdd sous forme d'objet dateTime il n'st pas possible d'afficher methode 
-                    {{ data.createAt|date("d/m/Y")}}   et  {{ data.createAt|date("H:i:s") }}< #}
+                    {# La date est renvoyée par la BDD sous form d'objet DateTime, donc il n'est pas possible de l'afficher comme ceci : data.createdAt, un objet ne peut être convertit en une chaine de caractère #}
+                    {# Nous devons pour cela utiliser un filtre TWIG #}
+                    {# date() est un filtre TWIG permettant de convertir un objet DateTime en une chaine de caractère #}
+                    {#  date('d/m/Y') --> date('jour/mois/année') #}
+                    {#  date('H:i:s') --> date('heure/minute/seconde') #}
 
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="{{ path('blog_show', {'id': data.id} ) }}" class="btn btn-dark">    Go somewhere</a>
+                    <a href="{{ path('blog_show', {'id': data.id } ) }}" class="btn btn-dark">Voir le détail</a>
                     {# path('blog_show') : nom de la route pour le détail d'un article définit dans la méthode show() du controller 'BlogController' #}
+                    {# La route 'blog_show' permet de voir le détail d'un article et cette route attend un paramètre de type 'id' dans l'URL donc il faut fournir en 2ème argument de la méthode path() l'id de l'article #}
                 </div>
             </div>
 
@@ -41,6 +44,3 @@
     </div>
 
 {% endblock %}
-
-
-

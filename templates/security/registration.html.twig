@@ -6,4 +6,20 @@
 
     <h1 class="display-4 text-center my-4">Créer votre compte</h1>
 
+    {{ form_start(form, {'attr': {'class' : 'col-md-6 mx-auto' }} ) }}
+
+    {{ form_row(form.username, {'label' :"Nom d'utilisateur"} ) }}
+
+     {{ form_row(form.email) }}
+
+      {{ form_row(form.password, {'label' : "nom de l utilisteur" } ) }}
+
+       {{ form_row(form.confirm_password, {'label': "Mot de passe"}  ) }}
+
+       <button type="submit" class="btn btn-dark">Inscription</button>
+
+    {{ form_end(form) }}
+
+
+
     {% endblock %}
